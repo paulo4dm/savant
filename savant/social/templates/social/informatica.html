@@ -1,0 +1,58 @@
+{% extends 'social/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Áreas de Interesse
+        <small>Selecione a área de interesse</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Áreas de Interesse</a></li>
+
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+          <!-- Matematica -->
+            <div class="col-md-12">
+              <!-- USERS LIST -->
+              <div class="box">
+                <div class="box-header">
+                  <div class="box-tools pull-right">
+                    <span class="label label-success">8 Tutores</span>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                  </div><br>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                  <ul class="users-list clearfix">
+                    {% for user in users %}
+                      <li>
+                        <img src="{% static 'dist/img/user-img.png' %}" alt="User Image">
+                        <a class="users-list-name" href="#">{{ user.first_name }} {{ user.last_name }}</a>
+                        <span class="users-list-date">User</span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                  <!-- /.users-list -->
+                </div>
+                <!-- /.box-body -->
+                <br>
+              </div>
+              <!--/.box -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        <!-- /Matematica -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock %}
