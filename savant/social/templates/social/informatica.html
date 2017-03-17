@@ -7,11 +7,11 @@
     <section class="content-header">
       <h1>
         Áreas de Interesse
-        <small>Selecione a área de interesse</small>
+        <small>Matemática</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Áreas de Interesse</a></li>
+        <li class="active">Áreas de Interesse</li>
 
       </ol>
     </section>
@@ -35,7 +35,7 @@
                     {% for user in users %}
                       <li>
                         <img src="{% static 'dist/img/user-img.png' %}" alt="User Image">
-                        <a class="users-list-name" href="#">{{ user.first_name }} {{ user.last_name }}</a>
+                        <a class="users-list-name" href="{% url 'profile' pk=user.pk %}">{{ user.first_name }} {{ user.last_name }}</a>
                         <span class="users-list-date">User</span>
                       </li>
                     {% endfor %}

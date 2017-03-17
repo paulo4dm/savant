@@ -6,12 +6,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Áreas de Interesse
-        <small>Selecione a área de interesse</small>
+        Tutores
+        <small>Área de Interesse: Matemática</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Áreas de Interesse</a></li>
+        <li class="active">Tutores</li>
 
       </ol>
     </section>
@@ -19,7 +20,7 @@
     <!-- Main content -->
     <section class="content">
           <!-- Matematica -->
-            <div class="col-md-12">
+            <div class="col-md-13">
               <!-- USERS LIST -->
               <div class="box">
                 <div class="box-header">
@@ -35,7 +36,7 @@
                     {% for user in users %}
                       <li>
                         <img src="{% static 'dist/img/user-img.png' %}" alt="User Image">
-                        <a class="users-list-name" href="{% url 'profile' %}">{{ user.first_name }} {{ user.last_name }}</a>
+                        <a class="users-list-name" href="{% url 'profile' pk=user.pk %}">{{ user.first_name }} {{ user.last_name }}</a>
                         <span class="users-list-date">User</span>
                       </li>
                     {% endfor %}
