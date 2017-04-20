@@ -11,7 +11,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Áreas de Interesse</a></li>
+        <li><a href="{% url 'index' %}">Áreas de Interesse</a></li>
         <li class="active">Tutores</li>
 
       </ol>
@@ -19,14 +19,13 @@
 
     <!-- Main content -->
     <section class="content">
-          <!-- Matematica -->
             <div class="col-md-13">
               <!-- USERS LIST -->
               <div class="box">
                 <div class="box-header">
                   <div class="box-tools pull-right">
-                    <span class="label label-success">8 Tutores</span>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+<!--                     <span class="label label-success">8 Tutores</span>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> -->
                     </button>
                   </div><br>
                 </div>
@@ -35,9 +34,8 @@
                   <ul class="users-list clearfix">
                     {% for user in users %}
                       <li>
-                        <img src="{% static 'dist/img/user-img.png' %}" alt="User Image">
-                        <a class="users-list-name" href="{% url 'profile' pk=user.pk %}">{{ user.first_name }} {{ user.last_name }}</a>
-                        <span class="users-list-date">User</span>
+                        <a class="users-list-name" href="{% url 'profile' pk=user.id %}"><img src="{% static 'dist/img/user-img.png' %}" alt="User Image"><br>{{ user.first_name }} {{ user.last_name }}</a>
+                        <!-- <span class="users-list-date">User</span> -->
                       </li>
                     {% endfor %}
                   </ul>
@@ -49,9 +47,6 @@
               <!--/.box -->
             </div>
             <!-- /.col -->
-          </div>
-          <!-- /.row -->
-        <!-- /Matematica -->
     </section>
     <!-- /.content -->
   </div>

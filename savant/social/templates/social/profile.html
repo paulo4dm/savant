@@ -35,16 +35,37 @@
                   <b>Amigos</b> <a class="pull-right">1,322</a>
                 </li> -->
                 <li class="list-group-item">
-                  <b>Conexões</b> <a class="pull-right">543</a>
+                  <b>Conexões ativas</b> <span class="pull-right">{{ num }}</span>
                 </li>
+                <!-- AQUI VAI ENTRAR A GRADUAÇÃO GAMIFICADA -->
                 <!-- <li class="list-group-item">
-                  <b>Friends</b> <a class="pull-right">13,287</a>
+                  <b>Conexões ativas</b> <a class="pull-right">5</a>
                 </li> -->
               </ul>
-
-              <a href="#" class="btn btn-primary btn-block"><b>Solicitar conexão</b></a>
+              {% if profile_user.id != user.id %}
+                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target=".bs-example-modal-sm">
+                  <b>Solicitar conexão</b>
+                </button>
+              {% endif %}
             </div>
-            <!-- /.box-body -->
+            <!-- Modal (com as areas de interesse para solicitar conexão) -->
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Selecione uma área de interesse</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="box-body">
+                      <a href="{% url 'connect' pk=user.id tutor=profile_user.id area=2 %}" type="button" class="btn btn-default btn-block btn-flat">Informática</a>
+                      <a href="{% url 'connect' pk=user.id tutor=profile_user.id area=1 %}" type="button" class="btn btn-default btn-block btn-flat">Matemática</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- /.box-body -->
           </div>
           <!-- /.box -->
 
@@ -93,13 +114,14 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-              <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              <!-- <li><a href="#activity" data-toggle="tab">Activity</a></li> -->
+              <li {% if tab == none %} class="active" {% endif %} ><a href="#timeline" data-toggle="tab">Timeline</a></li>
+              <li {% if tab == '2' %} class="active" {% endif %} ><a href="#connections" data-toggle="tab">Minhas Conexões</a></li>
+              <li {% if tab == '3' %} class="active" {% endif %} ><a href="#settings" data-toggle="tab">Minha Conta</a></li>
             </ul>
             <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-                <!-- Post -->
+              <!-- <div class="active tab-pane" id="activity">
+
                 <div class="post">
                   <div class="user-block">
                     <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user1-128x128.jpg' %}">
@@ -109,7 +131,7 @@
                         </span>
                     <span class="description">Shared publicly - 7:30 PM today</span>
                   </div>
-                  <!-- /.user-block -->
+
                   <p>
                     Lorem ipsum represents a long-held tradition for designers,
                     typographers and the like. Some people hate it and argue for
@@ -128,9 +150,7 @@
 
                   <input class="form-control input-sm" type="text" placeholder="Type a comment">
                 </div>
-                <!-- /.post -->
 
-                <!-- Post -->
                 <div class="post clearfix">
                   <div class="user-block">
                     <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user7-128x128.jpg' %}" alt="User Image">
@@ -140,7 +160,7 @@
                         </span>
                     <span class="description">Sent you a message - 3 days ago</span>
                   </div>
-                  <!-- /.user-block -->
+
                   <p>
                     Lorem ipsum represents a long-held tradition for designers,
                     typographers and the like. Some people hate it and argue for
@@ -160,9 +180,7 @@
                     </div>
                   </form>
                 </div>
-                <!-- /.post -->
 
-                <!-- Post -->
                 <div class="post">
                   <div class="user-block">
                     <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user6-128x128.jpg' %}" alt="User Image">
@@ -172,12 +190,12 @@
                         </span>
                     <span class="description">Posted 5 photos - 5 days ago</span>
                   </div>
-                  <!-- /.user-block -->
+
                   <div class="row margin-bottom">
                     <div class="col-sm-6">
                       <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
                     </div>
-                    <!-- /.col -->
+
                     <div class="col-sm-6">
                       <div class="row">
                         <div class="col-sm-6">
@@ -185,19 +203,15 @@
                           <br>
                           <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
                         </div>
-                        <!-- /.col -->
+
                         <div class="col-sm-6">
                           <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
                           <br>
                           <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
                         </div>
-                        <!-- /.col -->
                       </div>
-                      <!-- /.row -->
                     </div>
-                    <!-- /.col -->
                   </div>
-                  <!-- /.row -->
 
                   <ul class="list-inline">
                     <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
@@ -210,27 +224,26 @@
 
                   <input class="form-control input-sm" type="text" placeholder="Type a comment">
                 </div>
-                <!-- /.post -->
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
+
+              </div> -->
+              <div {% if tab == none %} class="active tab-pane" {% else %} class="tab-pane" {% endif %} id="timeline">
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   <!-- timeline time label -->
                   <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
+                        <span class="bg-light-blue">
+                          17 Fev. 2014
                         </span>
                   </li>
                   <!-- /.timeline-label -->
                   <!-- timeline item -->
                   <li>
-                    <i class="fa fa-envelope bg-blue"></i>
+                    <i class="fa fa-calendar-plus-o bg-aqua"></i>
 
                     <div class="timeline-item">
                       <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
 
-                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                      <h3 class="timeline-header"><a href="#">Noah Dimitrio</a> quer agendar uma tutoria</h3>
 
                       <div class="timeline-body">
                         Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
@@ -239,63 +252,71 @@
                         quora plaxo ideeli hulu weebly balihoo...
                       </div>
                       <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">Read more</a>
-                        <a class="btn btn-danger btn-xs">Delete</a>
+                        <a class="btn btn-primary btn-xs">Aceitar</a>
+                        <a class="btn btn-danger btn-xs">Recusar</a>
                       </div>
                     </div>
                   </li>
                   <!-- END timeline item -->
                   <!-- timeline item -->
                   <li>
-                    <i class="fa fa-user bg-aqua"></i>
+                    <i class="fa fa-user-plus bg-blue"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins atrás</span>
 
-                      <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
+                      <h3 class="timeline-header no-border"><a href="#">Noah Dimitrio</a> enviou uma solicitação de conexão
                       </h3>
                     </div>
                   </li>
                   <!-- END timeline item -->
                   <!-- timeline item -->
                   <li>
-                    <i class="fa fa-comments bg-yellow"></i>
+                    <i class="fa fa-comment bg-yellow"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+                      <span class="time"><i class="fa fa-clock-o"></i> 27 mins atrás</span>
 
-                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                      <h3 class="timeline-header"><a href="#">Nyna Nascimento</a> enviou uma mensagem</h3>
 
                       <div class="timeline-body">
-                        Take me to your leader!
-                        Switzerland is small and neutral!
-                        We are more like Germany, ambitious and misunderstood!
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
                       </div>
                       <div class="timeline-footer">
-                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                        <a class="btn btn-primary btn-xs">Responder</a>
                       </div>
                     </div>
                   </li>
                   <!-- END timeline item -->
                   <!-- timeline time label -->
                   <li class="time-label">
-                        <span class="bg-green">
+                        <span class="bg-light-blue">
                           3 Jan. 2014
                         </span>
                   </li>
                   <!-- /.timeline-label -->
                   <!-- timeline item -->
                   <li>
-                    <i class="fa fa-camera bg-purple"></i>
+                    <i class="fa fa-check bg-green"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins atrás</span>
 
-                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                      <h3 class="timeline-header no-border"><a href="#">Nyna Nascimento</a> aceitou sua solicitação de conexão
+                      </h3>
+                    </div>
+                  </li>
+                  <!-- END timeline item -->                  
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-book bg-purple"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> 2 dias atrás</span>
+
+                      <h3 class="timeline-header"><a href="#">Tiago Heineken</a> adicionou novo material de estudo</h3>
 
                       <div class="timeline-body">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
                         <img src="http://placehold.it/150x100" alt="..." class="margin">
                         <img src="http://placehold.it/150x100" alt="..." class="margin">
                       </div>
@@ -307,17 +328,72 @@
                   </li>
                 </ul>
               </div>
-              <!-- /.tab-pane -->
 
-              <div class="tab-pane" id="settings">
+              <!-- /.tab-pane -->
+              <div {% if tab == '2' %} class="active tab-pane" {% else %} class="tab-pane" {% endif %} id="connections">
+                <div class="box">
+                  <div class="box-body no-padding">                  
+                    <table class="table table-striped">
+                      <tr>
+                        <th>Conexão com</th>
+                        <th>Seu papel</th>
+                        <th>Área de interesse</th>
+                        <th>Status</th>
+                      </tr>
+                      {% for connection in connections %}
+                      <tr>
+                        <td>
+                          {% if connection.tutor == profile_user %}
+                            <a href="{% url 'connect-details' pk=user.id con_user=connection.educando.id conexao=connection.id %}">
+                            {{connection.educando.first_name}} {{connection.educando.last_name}}
+                          {% elif connection.educando == profile_user %}
+                            <a href="{% url 'connect-details' pk=user.id con_user=connection.tutor.id conexao=connection.id%}">
+                            {{connection.tutor.first_name}} {{connection.tutor.last_name}}
+                          {% endif %}                          
+                        </a></td>
+                        <td>
+                          {% if connection.tutor == profile_user %}
+                            Tutor
+                          {% elif connection.educando == profile_user %}
+                            Educando
+                          {% endif %}                          
+                        </td>
+                        <td>{{ connection.area_interesse }}</td>
+                        <td>
+                          {% if connection.status == 'Pendente' %}
+                            <span class="label label-default">Pendente</span>
+                          {% elif connection.status == 'Ativa' %}
+                            <span class="label label-info">&nbsp Ativa &nbsp</span>
+                          {% else %}
+                              <span class="label label-default">Inativa</span>
+                          {% endif %}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </table>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+              </div>
+              <!-- /.tab-pane -->              
+
+              <div {% if tab == '3' %} class="active tab-pane" {% else %} class="tab-pane" {% endif %} id="settings">
                 <form class="form-horizontal">
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <label for="inputName" class="col-sm-2 control-label">Nome</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                      <input type="email" class="form-control" id="inputName" placeholder="Nome">
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Sobrenome</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName" placeholder="Sobrenome">
+                    </div>
+                  </div>                  
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
@@ -326,38 +402,34 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <label for="inputEmail" class="col-sm-2 control-label">Curso/Formação</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Seu curso">
                     </div>
-                  </div>
+                  </div>                  
                   <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                    <label for="inputExperience" class="col-sm-2 control-label">Bio</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                      <textarea class="form-control" id="inputExperience" placeholder="Biografia"></textarea>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
 
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                    </div>
-                  </div>
+
+              <div class="form-group">
+                <label for="inputSkills" class="col-sm-2 control-label">Habilidades</label>
+                <div class="col-sm-10">
+                  <select class="form-control select2" multiple="multiple" data-placeholder="Selecione..."style="width: 100%;">
+                    <option>Matemática</option>
+                    <option>Informática</option>
+                  </select>
+                </div>
+              </div>
+
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button type="submit" class="btn btn-primary">Salvar alterações</button>
                     </div>
                   </div>
                 </form>
