@@ -37,10 +37,22 @@
                 <li class="list-group-item">
                   <b>Conexões ativas</b> <span class="pull-right">{{ num }}</span>
                 </li>
-                <!-- AQUI VAI ENTRAR A GRADUAÇÃO GAMIFICADA -->
-                <!-- <li class="list-group-item">
-                  <b>Conexões ativas</b> <a class="pull-right">5</a>
-                </li> -->
+                <!-- INICIO GAMIFICATION -->
+                <li class="list-group-item">
+                  <center>
+                    <h1 class="rating-num">
+                        0.0</h1>
+                    <div class="rating">
+                        <span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty">
+                        </span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty">
+                        </span><span class="glyphicon glyphicon-star-empty"></span>
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-user"></span> 0 pontos
+                    </div>
+                  </center>
+                </li>
+                <!-- FIM GAMIFICATION -->
               </ul>
               {% if profile_user.id != user.id %}
                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target=".bs-example-modal-sm">
@@ -114,17 +126,27 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <!-- <li><a href="#activity" data-toggle="tab">Activity</a></li> -->
-              <li {% if tab == none %} class="active" {% endif %} ><a href="#timeline" data-toggle="tab">Timeline</a></li>
-              <li {% if tab == '2' %} class="active" {% endif %} ><a href="#connections" data-toggle="tab">Minhas Conexões</a></li>
-              <li {% if tab == '3' %} class="active" {% endif %} ><a href="#settings" data-toggle="tab">Minha Conta</a></li>
+              <!-- <li><a href="#activity" data-toggle="tab">Atividades</a></li> -->
+              {% if profile_user.id == user.id %}
+                <li {% if tab == none %} class="active" {% endif %} ><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                <li {% if tab == '2' %} class="active" {% endif %} ><a href="#connections" data-toggle="tab">Minhas Conexões</a></li>
+                <li {% if tab == '3' %} class="active" {% endif %} ><a href="#settings" data-toggle="tab">Minha Conta</a></li>
+              {% endif %}
+              {% if profile_user.id != user.id %}
+                <li {% if tab == none %} class="active" {% endif %} >
+                  <a href="#activity" data-toggle="tab">Atividades</a>
+                </li>
+                <li {% if tab == 4 %} class="active" {% endif %} >
+                  <a href="#testmonials" data-toggle="tab">Depoimentos</a>
+                </li>
+              {% endif %}
             </ul>
             <div class="tab-content">
-              <!-- <div class="active tab-pane" id="activity">
-
+            {% if profile_user.id != user.id %}
+              <div {% if tab == none %} class="active tab-pane" {% else %} class="tab-pane" {% endif %} id="activity">
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user1-128x128.jpg' %}">
+                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user-img.png' %}">
                         <span class="username">
                           <a href="#">Jonathan Burke Jr.</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
@@ -153,7 +175,7 @@
 
                 <div class="post clearfix">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user7-128x128.jpg' %}" alt="User Image">
+                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user-img.png' %}" alt="User Image">
                         <span class="username">
                           <a href="#">Sarah Ross</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
@@ -183,7 +205,7 @@
 
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user6-128x128.jpg' %}" alt="User Image">
+                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user-img.png' %}" alt="User Image">
                         <span class="username">
                           <a href="#">Adam Jones</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
@@ -224,8 +246,92 @@
 
                   <input class="form-control input-sm" type="text" placeholder="Type a comment">
                 </div>
+              </div>
 
-              </div> -->
+
+
+
+            <!-- ABA DE DEPOIMENTOS -->
+              <div {% if tab == '4' %} class="active tab-pane" {% else %} class="tab-pane" {% endif %} id="testmonials">
+                <!-- INICIO DEPOIMENTO 01 -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user-img.png' %}">
+                        <span class="username">
+                          <a href="#">John Lennon</a>
+                        </span>
+                    <span class="description">Shared publicly - 7:30 PM today</span>
+                  </div>
+                  <div class="panel-body">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                      Nihil quaerat aperiam unde nemo suscipit id repellendus ad doloribus quae, 
+                      fugiat quia rem molestias sequi, amet nisi qui cumque iusto earum!
+                    </p>
+                      <span class="pull-right">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </small>
+                  </div>
+                </div>
+                <!-- FIM DEPOIMENTO 01 -->
+                <!-- INICIO DEPOIMENTO 02 -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user-img.png' %}">
+                        <span class="username">
+                          <a href="#">Paul McCartney</a>
+                        </span>
+                    <span class="description">Shared publicly - 7:30 PM today</span>
+                  </div>
+                  <div class="panel-body">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                      Nihil quaerat aperiam unde nemo suscipit id repellendus ad doloribus quae, 
+                      fugiat quia rem molestias sequi, amet nisi qui cumque iusto earum!
+                    </p>
+                      <span class="pull-right">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                    </small>
+                  </div>
+                </div>
+                <!-- FIM DEPOIMENTO 02 -->
+                <!-- INICIO DEPOIMENTO 03 -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="{% static 'dist/img/user-img.png' %}">
+                        <span class="username">
+                          <a href="#">Ringo Starr</a>
+                        </span>
+                    <span class="description">Shared publicly - 7:30 PM today</span>
+                  </div>
+                  <div class="panel-body">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                      Nihil quaerat aperiam unde nemo suscipit id repellendus ad doloribus quae, 
+                      fugiat quia rem molestias sequi, amet nisi qui cumque iusto earum!
+                    </p>
+                      <span class="pull-right">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                    </small>
+                  </div>
+                </div>
+                <!-- FIM DEPOIMENTO 03 -->
+            <!-- FIM ABA DEPOIMENTOS -->
+            {% endif %}
+            
+            {% if profile_user.id == user.id %}
               <div {% if tab == none %} class="active tab-pane" {% else %} class="tab-pane" {% endif %} id="timeline">
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
@@ -439,6 +545,7 @@
             <!-- /.tab-content -->
           </div>
           <!-- /.nav-tabs-custom -->
+        {% endif %}
         </div>
         <!-- /.col -->
       </div>
